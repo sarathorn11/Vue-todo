@@ -10,29 +10,26 @@ const { lists } = storeToRefs(listsStore);
 
 listsStore.getAll();
 
-function myFunction() {
-    var input, filters="";
-    input = document.getElementById("myInput");
-    filters += input.value.toLowerCase();
-    if(filters==""){
-        window.location.reload();
-    }
-    lists._object.lists=lists._object.lists.filter(post => {
-        return post.todo.toLowerCase().includes(filters.toLowerCase())
-    });
-    return lists._object.lists.filter(post => {
-        return post.todo.toLowerCase().includes(filters.toLowerCase())
-    });
-    
-}
+// function myFunction() {
+//     var input, filters="";
+//     input = document.getElementById("myInput");
+//     filters += input.value.toLowerCase();
+//     console.log(lists._object.lists.filter(post => {
+//         return post.todo.toLowerCase().includes(filters.toLowerCase())
+//     }));
+//     return lists._object.lists.filter(post => {
+//         return post.todo.toLowerCase().includes(filters.toLowerCase())
+//     });
+// }
+
 
 </script>
 
 <template>
     <h1>Lists</h1>
     <router-link to="/lists/add" class="btn btn-sm btn-success mb-2">Add List</router-link>
-    <input type="text" id="myInput" class="form-control" v-on:keyup="myFunction()" placeholder="Search for names.."
-        title="Type in a name">
+    <!-- <input type="text" id="myInput" class="form-control" v-on:keyup="myFunction()" placeholder="Search for names.."
+        title="Type in a name"> -->
     <table class="table table-striped">
         <thead>
             <tr>
