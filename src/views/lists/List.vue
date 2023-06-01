@@ -7,12 +7,32 @@ const listsStore = useListsStore();
 const { lists } = storeToRefs(listsStore);
 
 
+
 listsStore.getAll();
+
+function myFunction() {
+    var input, filters="";
+    input = document.getElementById("myInput");
+    filters += input.value.toLowerCase();
+    if(filters==""){
+        location.reload();
+    }
+    lists._object.lists=lists._object.lists.filter(post => {
+        return post.todo.toLowerCase().includes(filters.toLowerCase())
+    });
+    return lists._object.lists.filter(post => {
+        return post.todo.toLowerCase().includes(filters.toLowerCase())
+    });
+    
+}
+
 </script>
 
 <template>
     <h1>Lists</h1>
     <router-link to="/lists/add" class="btn btn-sm btn-success mb-2">Add List</router-link>
+    <input type="text" id="myInput" class="form-control" v-on:keyup="myFunction()" placeholder="Search for names.."
+        title="Type in a name">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -26,7 +46,8 @@ listsStore.getAll();
                     <td>{{ list.todo }}</td>
                     <td style="white-space: nowrap">
                         <router-link :to="`/lists/edit/${list.id}`" class="btn btn-sm btn-primary mr-1">Edit</router-link>
-                        <button @click="listsStore.delete(list.id)" class="btn btn-sm btn-danger btn-delete-list" :disabled="list.isDeleting">
+                        <button @click="listsStore.delete(list.id)" class="btn btn-sm btn-danger btn-delete-list"
+                            :disabled="list.isDeleting">
                             <span v-if="list.isDeleting" class="spinner-border spinner-border-sm"></span>
                             <span v-else>Delete</span>
                         </button>
@@ -40,9 +61,9 @@ listsStore.getAll();
             </tr>
             <tr v-if="lists.error">
                 <td colspan="4">
-                    <div class="text-danger">Error loading lists: {{lists.error}}</div>
+                    <div class="text-danger">Error loading lists: {{ lists.error }}</div>
                 </td>
-            </tr>            
+            </tr>
         </tbody>
     </table>
 </template>

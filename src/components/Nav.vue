@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { useAuthStore } from '@/stores';
 
 const authStore = useAuthStore();
@@ -9,4 +9,4 @@ const authStore = useAuthStore();
             <router-link to="/" class="nav-item nav-link" style="color: black;">Home</router-link>
             <button @click="authStore.logout()" class="btn btn-link nav-item nav-link" style="color: red;">Logout</button>
     </nav>
-</template>
+</template> -->

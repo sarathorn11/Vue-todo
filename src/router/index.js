@@ -1,9 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import { useAuthStore, useAlertStore } from '@/stores';
 import { Home } from '@/views';
-import accountRoutes from './account.routes';
-import usersRoutes from './users.routes';
 import listsRoutes from './lists.routes';
 
 export const router = createRouter({
@@ -11,26 +8,9 @@ export const router = createRouter({
     linkActiveClass: 'active',
     routes: [
         { path: '/', component: Home },
-        { ...accountRoutes },
-        { ...usersRoutes },
         { ...listsRoutes},
         // catch all redirect to home page
-        { path: '/:pathMatch(.*)*', redirect: '/' }
+        { path: '/:pathMatch(.*)*', redirect: '/lists/laout' }
     ]
 });
 
-router.beforeEach(async (to) => {
-    // clear alert on route change
-    const alertStore = useAlertStore();
-    alertStore.clear();
-
-    // redirect to login page if not logged in and trying to access a restricted page 
-    const publicPages = ['/account/login', '/account/register'];
-    const authRequired = !publicPages.includes(to.path);
-    const authStore = useAuthStore();
-
-    if (authRequired && !authStore.user) {
-        authStore.returnUrl = to.fullPath;
-        return '/account/login';
-    }
-});
