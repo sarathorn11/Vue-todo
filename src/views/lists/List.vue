@@ -15,7 +15,7 @@ function myFunction() {
     input = document.getElementById("myInput");
     filters += input.value.toLowerCase();
     if(filters==""){
-        location.reload();
+        window.location.reload();
     }
     lists._object.lists=lists._object.lists.filter(post => {
         return post.todo.toLowerCase().includes(filters.toLowerCase())
